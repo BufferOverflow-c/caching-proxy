@@ -1,0 +1,7 @@
+# ninja log v7
+1	11	1762797615314339373	/Users/c2/Documents/PersonalProjects/cpp/roadmap_sh/caching_proxy/cmake-build-debug/CMakeFiles/cmake.verify_globs	b2fa938e956f2e1
+11	1874	1762797527873073836	CMakeFiles/caching_proxy.dir/src/main.cpp.o	fe3ad556a4be2504
+398	437	1762797452242501775	caching_proxy	93921ef4626fb390
+2	13	1762797630431045891	/Users/c2/Documents/PersonalProjects/cpp/roadmap_sh/caching_proxy/cmake-build-debug/CMakeFiles/cmake.verify_globs	b2fa938e956f2e1
+17	2074	1762797630446491917	CMakeFiles/caching_proxy.dir/src/main.cpp.o	fe3ad556a4be2504
+2074	2172	1762797632503231393	caching_proxy	2de6292ecaedcf7c
