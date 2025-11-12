@@ -58,6 +58,15 @@ build CMakeFiles/caching_proxy.dir/src/main.cpp.o: CXX_COMPILER__caching_proxy_u
   OBJECT_DIR = CMakeFiles/caching_proxy.dir
   OBJECT_FILE_DIR = CMakeFiles/caching_proxy.dir/src
 
+build CMakeFiles/caching_proxy.dir/src/server.cpp.o: CXX_COMPILER__caching_proxy_unscanned_Debug /Users/c2/Documents/PersonalProjects/cpp/roadmap_sh/caching_proxy/src/server.cpp || cmake_object_order_depends_target_caching_proxy
+  CONFIG = Debug
+  DEFINES = -DCPPHTTPLIB_BROTLI_SUPPORT -DCPPHTTPLIB_OPENSSL_SUPPORT -DCPPHTTPLIB_USE_CERTS_FROM_MACOSX_KEYCHAIN -DCPPHTTPLIB_USE_NON_BLOCKING_GETADDRINFO -DCPPHTTPLIB_ZLIB_SUPPORT -DCPPHTTPLIB_ZSTD_SUPPORT
+  DEP_FILE = CMakeFiles/caching_proxy.dir/src/server.cpp.o.d
+  FLAGS = -g -std=gnu++2b -arch arm64
+  INCLUDES = -I/Users/c2/Documents/PersonalProjects/cpp/roadmap_sh/caching_proxy/src/include -I/src/vendor/cpp-httplib -isystem /Users/c2/Documents/PersonalProjects/cpp/roadmap_sh/caching_proxy/src/vendor/cpp-httplib -isystem /opt/homebrew/include
+  OBJECT_DIR = CMakeFiles/caching_proxy.dir
+  OBJECT_FILE_DIR = CMakeFiles/caching_proxy.dir/src
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target caching_proxy
@@ -66,7 +75,7 @@ build CMakeFiles/caching_proxy.dir/src/main.cpp.o: CXX_COMPILER__caching_proxy_u
 #############################################
 # Link the executable caching_proxy
 
-build caching_proxy: CXX_EXECUTABLE_LINKER__caching_proxy_Debug CMakeFiles/caching_proxy.dir/src/main.cpp.o | /opt/homebrew/lib/libbrotlicommon.dylib /opt/homebrew/lib/libbrotlienc.dylib /opt/homebrew/lib/libbrotlidec.dylib /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/lib/libz.tbd /opt/homebrew/lib/libzstd.a /opt/homebrew/lib/libssl.dylib /opt/homebrew/lib/libcrypto.dylib /opt/homebrew/lib/libbrotlicommon.dylib /opt/homebrew/lib/libbrotlienc.dylib /opt/homebrew/lib/libbrotlidec.dylib /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/lib/libz.tbd /opt/homebrew/lib/libzstd.a /opt/homebrew/lib/libssl.dylib /opt/homebrew/lib/libcrypto.dylib
+build caching_proxy: CXX_EXECUTABLE_LINKER__caching_proxy_Debug CMakeFiles/caching_proxy.dir/src/main.cpp.o CMakeFiles/caching_proxy.dir/src/server.cpp.o | /opt/homebrew/lib/libbrotlicommon.dylib /opt/homebrew/lib/libbrotlienc.dylib /opt/homebrew/lib/libbrotlidec.dylib /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/lib/libz.tbd /opt/homebrew/lib/libzstd.a /opt/homebrew/lib/libssl.dylib /opt/homebrew/lib/libcrypto.dylib /opt/homebrew/lib/libbrotlicommon.dylib /opt/homebrew/lib/libbrotlienc.dylib /opt/homebrew/lib/libbrotlidec.dylib /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/lib/libz.tbd /opt/homebrew/lib/libzstd.a /opt/homebrew/lib/libssl.dylib /opt/homebrew/lib/libcrypto.dylib
   CONFIG = Debug
   FLAGS = -g -arch arm64
   LINK_FLAGS = -Wl,-search_paths_first -Wl,-headerpad_max_install_names
