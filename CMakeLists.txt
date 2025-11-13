@@ -6,6 +6,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 #find_package(nlohmann_json 3.12.0 REQUIRED)
+find_package(OpenSSL REQUIRED)
 
 file(GLOB_RECURSE MY_SOURCES CONFIGURE_DEPENDS
     "${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp"
@@ -31,8 +32,8 @@ target_link_libraries(caching_proxy
     /opt/homebrew/lib/libbrotlidec.dylib
     /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/lib/libz.tbd
     /opt/homebrew/lib/libzstd.a
-    /opt/homebrew/lib/libssl.dylib
     /opt/homebrew/lib/libcrypto.dylib
+    ${OPENSSL_LIBRARIES}
 )
 
 #add_subdirectory(src/vendor/curlpp-0.8.1)

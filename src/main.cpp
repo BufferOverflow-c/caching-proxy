@@ -1,20 +1,24 @@
-#include <cstdio>
+#define CPPHTTPLIB_OPENSSL_SUPPORT
+#include <httplib.h>
 #include <iostream>
 #include <string>
+#include <unordered_map>
 
-#include <httplib.h>
+std::string strip_url(const std::string &url);
 
-std::string dump_headers(const httplib::Headers &headers);
-std::string dump_multipart_formdata(const httplib::MultipartFormData &form);
-std::string logger(const httplib::Request &req, const httplib::Response &res);
+struct CacheEntry {
+    std::string body;
+    httplib::Headers headers;
+    std::string content_type;
+};
 
 int main(int argc, char *argv[]) {
     if (argc < 5) {
-        std::cerr << "Usage: ./caching-proxy --port <port_number> --origin <url>";
+        std::cerr << "Usage: ./caching-proxy --port <port_number> --origin <url>\n";
         return 1;
     }
 
-    int port;
+    int port{};
 
     try {
         port = std::stoi(argv[2]);
@@ -24,119 +28,62 @@ int main(int argc, char *argv[]) {
         std::cerr << "Exception: " << e.what() << std::endl;
     }
 
+    std::string origin_url = argv[4];
+    std::unordered_map<std::string, CacheEntry> cache;
+
     httplib::Server srv;
-    srv.set_logger([](const httplib::Request &req, const httplib::Response &res) { std::cout << logger(req, res); });
+    httplib::SSLClient cli(strip_url(argv[4]));
+    cli.enable_server_certificate_verification(false);
 
-    while(true) {
+    srv.Get(".*", [&](const httplib::Request &req, httplib::Response &res) {
+        std::string path = req.path.empty() ? "/" : req.path;
 
-    srv.Get("/products", [&](const httplib::Request &, httplib::Response &res) {
-        res.set_redirect("http://dummyjson.com/products");
+        auto iter = cache.find(path);
+        if (iter != cache.end()) {
+            const auto &entry = iter->second;
+            res.set_content(entry.body, entry.content_type);
+            res.set_header("X-Cache", "HIT");
+            std::cout << path << " X-Cache: HIT\n";
+            return;
+        }
+
+        auto origin_res = cli.Get(path.c_str());
+        if (!origin_res) {
+            res.status = 502;
+            res.set_content("Bad Gateway (origin request failed)", "text/plain");
+            return;
+        }
+
+        cache[path] = {
+            origin_res->body,
+            origin_res->headers,
+            origin_res->get_header_value("Content-Type")
+        };
+
+        res.set_content(origin_res->body, origin_res->get_header_value("Content-Type"));
+        res.set_header("X-Cache", "MISS");
+
+        for (const auto &h : origin_res->headers) {
+            std::string key = h.first;
+            if (key != "Content-Length" && key != "Transfer-Encoding" && key != "Content-Encoding" && key != "Content-Type") {
+                res.set_header(h.first.c_str(), h.second.c_str());
+            }
+        }
+
+        std::cout << path << " X-Cache: MISS\n";
     });
 
-    srv.set_error_handler([](const httplib::Request &, httplib::Response &res) {
-        //const char *fmt = "<p>Error Status: <span style='color:red;'>%d</span></p>";
-        //char buf[BUFSIZ];
-        //snprintf(buf, sizeof(buf), fmt, res.status);
-        //res.set_content(buf, "text/html");
-        res.set_redirect("http://dummyjson.com/");
-    });
-
-    auto th = std::thread([&]() { srv.listen("localhost", port); });
-
-    auto se = httplib::detail::scope_exit([&] {
-        srv.stop();
-        th.join();
-    });
-
-    srv.wait_until_ready();
-    }
-
-    return 0;
+    srv.listen("0.0.0.0", port);
 }
 
-std::string dump_headers(const httplib::Headers &headers) {
-    std::string str;
-    char buf[BUFSIZ];
+std::string strip_url(const std::string &url) {
+    std::string host = url;
 
-    for (auto iter = headers.begin(); iter != headers.end(); iter++) {
-        const auto &x = *iter;
-        snprintf(buf, sizeof(buf), "%s: %s\n", x.first.c_str(), x.second.c_str());
-        str += buf;
+    if (host.rfind("http://", 0) == 0) {
+        host = host.substr(7);
+    } else if (host.rfind("https://", 0) == 0) {
+        host = host.substr(8);
     }
 
-    return str;
-}
-
-std::string dump_multipart_formdata(const httplib::MultipartFormData &form) {
-    std::string str;
-    char buf[BUFSIZ];
-
-    str += "================================\n";
-
-    for (const auto &x : form.fields) {
-        const auto &name = x.first;
-        const auto &field = x.second;
-
-        snprintf(buf, sizeof(buf), "name: %s\n", name.c_str());
-        str += buf;
-
-        snprintf(buf, sizeof(buf), "text length: %zu\n", field.content.size());
-        str += buf;
-
-        str += "================================\n";
-    }
-
-    for (const auto &x : form.files) {
-        const auto &name = x.first;
-        const auto &file = x.second;
-
-        snprintf(buf, sizeof(buf), "name: %s\n", name.c_str());
-        str += buf;
-
-        snprintf(buf, sizeof(buf), "filename: %s\n", file.filename.c_str());
-        str += buf;
-
-        snprintf(buf, sizeof(buf), "content type: %s\n", file.content_type.c_str());
-        str += buf;
-
-        snprintf(buf, sizeof(buf), "text length: %zu\n", file.content.size());
-        str += buf;
-
-        str += "================================\n";
-    }
-
-    return str;
-}
-
-std::string logger(const httplib::Request &req, const httplib::Response &res) {
-    std::string str;
-    char buf[BUFSIZ];
-
-    str += "================================\n";
-
-    snprintf(buf, sizeof(buf), "%s %s %s", req.method.c_str(),
-             req.version.c_str(), req.path.c_str());
-    str += buf;
-
-    std::string query;
-    for (auto it = req.params.begin(); it != req.params.end(); ++it) {
-      const auto &x = *it;
-      snprintf(buf, sizeof(buf), "%c%s=%s",
-               (it == req.params.begin()) ? '?' : '&', x.first.c_str(),
-               x.second.c_str());
-      query += buf;
-    }
-    snprintf(buf, sizeof(buf), "%s\n", query.c_str());
-    str += buf;
-
-    str += dump_headers(req.headers);
-    str += dump_multipart_formdata(req.form);
-
-    str += "================================\n";
-
-    snprintf(buf, sizeof(buf), "%d\n", res.status);
-    str += buf;
-    str += dump_headers(res.headers);
-
-    return str;
+    return host;
 }
