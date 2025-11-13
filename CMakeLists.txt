@@ -11,27 +11,18 @@ file(GLOB_RECURSE MY_SOURCES CONFIGURE_DEPENDS
     "${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp"
 )
 
-#list(FILTER MY_SOURCES EXCLUDE REGEX "src/vendor/cpp-httplib/benchmark/crow/.*")
-list(FILTER MY_SOURCES EXCLUDE REGEX "src/vendor/cpp-httplib/test/.*")
-list(FILTER MY_SOURCES EXCLUDE REGEX "src/vendor/cpp-httplib/benchmark/.*")
-#list(FILTER MY_SOURCES EXCLUDE REGEX ".*/curlpp-0.8.1/examples/.*")
-
 add_executable(${CMAKE_PROJECT_NAME} ${MY_SOURCES})
-
 
 target_include_directories(${CMAKE_PROJECT_NAME} PUBLIC
     "${CMAKE_CURRENT_SOURCE_DIR}/src/include"
-    "${CMAKE_ABSOLUTE_SOURCE_DIR}/src/vendor/cpp-httplib"
+    "${CMAKE_CURRENT_SOURCE_DIR}/src/vendor/"
 #    "${CMAKE_CURRENT_SOURCE_DIR}/src/vendor/curlpp-0.8.1/include"
 #    "${CMAKE_CURRENT_SOURCE_DIR}/src/vendor/curlpp-0.8.1/include/curlpp"
 #    "${CMAKE_CURRENT_SOURCE_DIR}/src/vendor/curlpp-0.8.1/include/utilspp"
 )
 
-
-add_subdirectory(src/vendor/cpp-httplib)
 target_link_libraries(caching_proxy
     PRIVATE
-    httplib
     "-framework CoreFoundation"
     "-framework Security"
     "-framework CFNetwork"

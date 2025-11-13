@@ -1,8 +1,5 @@
 # ninja log v7
-2	11	1762970792741439918	/Users/c2/Documents/PersonalProjects/cpp/roadmap_sh/caching_proxy/cmake-build-debug/CMakeFiles/cmake.verify_globs	b2fa938e956f2e1
-9	1374	1762966681696246524	CMakeFiles/caching_proxy.dir/src/main.cpp.o	fe3ad556a4be2504
-42	2109	1762970622414780626	CMakeFiles/caching_proxy.dir/src/server.cpp.o	9d76bba9543af80
-2109	2203	1762970624481138490	caching_proxy	32b98524c2f5b7f5
-2	11	1762970824650264711	/Users/c2/Documents/PersonalProjects/cpp/roadmap_sh/caching_proxy/cmake-build-debug/CMakeFiles/cmake.verify_globs	b2fa938e956f2e1
-23	2018	1762970824671839020	CMakeFiles/caching_proxy.dir/src/server.cpp.o	9d76bba9543af80
-2019	2114	1762970826666948032	caching_proxy	32b98524c2f5b7f5
+0	8	1763051412312939514	/Users/c2/Documents/PersonalProjects/cpp/roadmap_sh/caching_proxy/cmake-build-debug/CMakeFiles/cmake.verify_globs	b2fa938e956f2e1
+0	8	1763051458201054060	/Users/c2/Documents/PersonalProjects/cpp/roadmap_sh/caching_proxy/cmake-build-debug/CMakeFiles/cmake.verify_globs	b2fa938e956f2e1
+8	1845	1763051458209560676	CMakeFiles/caching_proxy.dir/src/main.cpp.o	5971ce68c31ccbe1
+1847	1949	1763051460048424333	caching_proxy	3e19d3128cffb7dd

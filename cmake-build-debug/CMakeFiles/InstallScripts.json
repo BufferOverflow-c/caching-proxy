@@ -1,8 +1,7 @@
 {
 	"InstallScripts" : 
 	[
-		"/Users/c2/Documents/PersonalProjects/cpp/roadmap_sh/caching_proxy/cmake-build-debug/cmake_install.cmake",
-		"/Users/c2/Documents/PersonalProjects/cpp/roadmap_sh/caching_proxy/cmake-build-debug/src/vendor/cpp-httplib/cmake_install.cmake"
+		"/Users/c2/Documents/PersonalProjects/cpp/roadmap_sh/caching_proxy/cmake-build-debug/cmake_install.cmake"
 	],
 	"Parallel" : false
 }

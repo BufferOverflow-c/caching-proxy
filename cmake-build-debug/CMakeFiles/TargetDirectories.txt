@@ -1,17 +1,3 @@
 /Users/c2/Documents/PersonalProjects/cpp/roadmap_sh/caching_proxy/cmake-build-debug/CMakeFiles/caching_proxy.dir
-/Users/c2/Documents/PersonalProjects/cpp/roadmap_sh/caching_proxy/cmake-build-debug/CMakeFiles/package.dir
-/Users/c2/Documents/PersonalProjects/cpp/roadmap_sh/caching_proxy/cmake-build-debug/CMakeFiles/package_source.dir
 /Users/c2/Documents/PersonalProjects/cpp/roadmap_sh/caching_proxy/cmake-build-debug/CMakeFiles/edit_cache.dir
 /Users/c2/Documents/PersonalProjects/cpp/roadmap_sh/caching_proxy/cmake-build-debug/CMakeFiles/rebuild_cache.dir
-/Users/c2/Documents/PersonalProjects/cpp/roadmap_sh/caching_proxy/cmake-build-debug/CMakeFiles/list_install_components.dir
-/Users/c2/Documents/PersonalProjects/cpp/roadmap_sh/caching_proxy/cmake-build-debug/CMakeFiles/install.dir
-/Users/c2/Documents/PersonalProjects/cpp/roadmap_sh/caching_proxy/cmake-build-debug/CMakeFiles/install/local.dir
-/Users/c2/Documents/PersonalProjects/cpp/roadmap_sh/caching_proxy/cmake-build-debug/CMakeFiles/install/strip.dir
-/Users/c2/Documents/PersonalProjects/cpp/roadmap_sh/caching_proxy/cmake-build-debug/src/vendor/cpp-httplib/CMakeFiles/package.dir
-/Users/c2/Documents/PersonalProjects/cpp/roadmap_sh/caching_proxy/cmake-build-debug/src/vendor/cpp-httplib/CMakeFiles/package_source.dir
-/Users/c2/Documents/PersonalProjects/cpp/roadmap_sh/caching_proxy/cmake-build-debug/src/vendor/cpp-httplib/CMakeFiles/edit_cache.dir
-/Users/c2/Documents/PersonalProjects/cpp/roadmap_sh/caching_proxy/cmake-build-debug/src/vendor/cpp-httplib/CMakeFiles/rebuild_cache.dir
-/Users/c2/Documents/PersonalProjects/cpp/roadmap_sh/caching_proxy/cmake-build-debug/src/vendor/cpp-httplib/CMakeFiles/list_install_components.dir
-/Users/c2/Documents/PersonalProjects/cpp/roadmap_sh/caching_proxy/cmake-build-debug/src/vendor/cpp-httplib/CMakeFiles/install.dir
-/Users/c2/Documents/PersonalProjects/cpp/roadmap_sh/caching_proxy/cmake-build-debug/src/vendor/cpp-httplib/CMakeFiles/install/local.dir
-/Users/c2/Documents/PersonalProjects/cpp/roadmap_sh/caching_proxy/cmake-build-debug/src/vendor/cpp-httplib/CMakeFiles/install/strip.dir
